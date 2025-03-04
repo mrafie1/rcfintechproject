@@ -6,24 +6,36 @@ from google import genai
 # from tkinter import filedialog
 # from PIL import Image
 
-
-client = genai.Client(api_key="AIzaSyA20E9DwFOd0Z5Rp2KwueG6I9w3VnkaDSU")
-response = client.models.generate_content(
-    model="gemini-2.0-flash", contents="Explain how AI works"
-)
-print(response.text)
-
-chat = client.chats.create(model="gemini-2.0-flash")
-
-history = []
+from flask import Flask, render_template
+app = Flask(__name__)
 
 
+@app.route('/')
+def index():
+    return "Hello World!"
 
-while True:
-    user_input = input("You: ")
-    model_response = chat.send_message(user_input)
-    print(model_response.text)
 
-    history.append({"role": "user", "parts": [user_input]})
-    history.append({"role": "model", "parts": [model_response.text]})
-    # print(history)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=4000)
+
+
+
+# client = genai.Client(api_key="AIzaSyA20E9DwFOd0Z5Rp2KwueG6I9w3VnkaDSU")
+# response = client.models.generate_content(
+#     model="gemini-2.0-flash", contents="Explain how AI works"
+# )
+# print(response.text)
+#
+# chat = client.chats.create(model="gemini-2.0-flash")
+#
+# history = []
+
+
+# while True:
+#     user_input = input("You: ")
+#     model_response = chat.send_message(user_input)
+#     print(model_response.text)
+#
+#     history.append({"role": "user", "parts": [user_input]})
+#     history.append({"role": "model", "parts": [model_response.text]})
+#     # print(history)
