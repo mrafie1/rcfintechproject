@@ -8,3 +8,15 @@ response = client.models.generate_content(
     model="gemini-2.0-flash", contents="Explain how AI works"
 )
 print(response.text)
+
+chat = client.chats.create(model="gemini-2.0-flash")
+
+history = []
+while True:
+    user_input = input("You: ")
+    model_response = chat.send_message(user_input)
+    print(model_response.text)
+
+    history.append({"role": "user", "parts": [user_input]})
+    history.append({"role": "model", "parts": [model_response.text]})
+    # print(history)
