@@ -2,6 +2,10 @@
 # Make sure you have pip installed, then download google-genai
 
 from google import genai
+# import tkinter as tk
+# from tkinter import filedialog
+# from PIL import Image
+
 
 client = genai.Client(api_key="AIzaSyA20E9DwFOd0Z5Rp2KwueG6I9w3VnkaDSU")
 response = client.models.generate_content(
@@ -12,6 +16,9 @@ print(response.text)
 chat = client.chats.create(model="gemini-2.0-flash")
 
 history = []
+
+
+
 while True:
     user_input = input("You: ")
     model_response = chat.send_message(user_input)
