@@ -43,13 +43,14 @@ class MyApp(tk.Frame):
         self.pager = tk.Frame(
             self.main_frame,
             background = self.colour1,
-            height = 125,
-            width = 400
+            height = 10,
+            width = 300
         )
 
         self.pager.columnconfigure(1,weight=1)
         self.pager.rowconfigure(0, weight=1)
-        self.pager.grid(column=0, row=1, sticky=tk.NS)
+        self.pager.rowconfigure(1, weight=1)
+        self.pager.grid(column=0, row= 0, sticky=tk.NS)
         self.pager.grid_propagate(False)
 
         inquiries_button = tk.Button(
@@ -60,16 +61,17 @@ class MyApp(tk.Frame):
             activeforeground = self.colour3,
             disabledforeground = self.colour4,
             highlightthickness = 0,
-            width = 10,
+            height = 3,
+            width = 15,
             relief = tk.FLAT,
-            font = ('Arial', 10), #can change
+            font = ('Arial', 15), #can change
             cursor = 'hand1',
             text = "Any inquiries",
             state=tk.DISABLED
 
         )
 
-        inquiries_button.grid(column = 0, row=0)
+        inquiries_button.grid(column = 1, row=1)
 
         self.page_number = tk.Label(
             self.pager,
@@ -88,22 +90,23 @@ class MyApp(tk.Frame):
             activeforeground=self.colour3,
             disabledforeground=self.colour4,
             highlightthickness=0,
-            width=10,
+            height = 3,
+            width=15,
             relief=tk.FLAT,
-            font=('Arial', 10),  # can change
+            font=('Arial', 15),  # can change
             cursor='hand1',
             text="Want to Return",
             state=tk.DISABLED
 
         )
 
-        wanttoreturn_button.grid(column=2, row=0)
+        wanttoreturn_button.grid(column=1, row=0)
 
 
 
 root = tk.Tk()
 root.title('My App')
-root.geometry("700x500")
+root.geometry("500x700")
 root.resizable(width=False, height=False)
 my_app_instance = MyApp(root)
 root.mainloop()
