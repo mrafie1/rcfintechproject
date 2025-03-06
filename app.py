@@ -118,7 +118,7 @@ class MyApp(tk.Frame):
             relief=tk.FLAT,
             font=('Times', 18, "bold"),  # Can change
             cursor='hand1',
-            text="Want to Return",
+            text="Refund / Return",
             # state=tk.DISABLED,
             command=lambda: self.change_page(2)
         )
