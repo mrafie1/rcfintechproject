@@ -53,7 +53,7 @@ class MyApp(tk.Frame):
         self.current_page_index = page_index
         self.pages[self.current_page_index]()
 
-    def page1(self):
+    def page1(self): #main page
         self.clear_frame(self.page_container)
 
         title = tk.Label(
@@ -67,7 +67,7 @@ class MyApp(tk.Frame):
 
         title.grid(column = 0, row = 0)
 
-        text = ('hi')
+        text = ('Main Page')
 
         content = tk.Label(
             self.page_container,
@@ -81,7 +81,7 @@ class MyApp(tk.Frame):
             wraplength=600
         )
 
-        content.grid(column = 1, row = 0, sticky=tk.NSEW, padx = 20)
+        content.grid(column = 1, row = 0, sticky=tk.NSEW, padx = 20, pady = 30)
 
 
         # Add some space between the button and the top row
@@ -126,13 +126,13 @@ class MyApp(tk.Frame):
         # Added padding (both vertical and horizontal)
         wanttoreturn_button.grid(column=1, row=1, padx=10, pady=20)
 
-    def page2(self):
+    def page2(self): #Inquiry chatbox page
         title = tk.Label(
             self.page_container,
             background=self.colour1,
             foreground=self.colour2,
             height=2,
-            font=('Axial', 26, "bold"),
+            font=('Times', 26, "bold"),
             text="page 2"
         )
 
@@ -152,23 +152,23 @@ class MyApp(tk.Frame):
             wraplength=600
         )
 
-        content.grid(column=0, row=0, sticky=tk.NSEW)
+        content.grid(column = 1, row = 0, sticky=tk.NSEW, padx = 30, pady = 30)
 
         self.return_button()
 
-    def page3(self):
+    def page3(self): #return analysis page
         title = tk.Label(
             self.page_container,
             background=self.colour1,
             foreground=self.colour2,
             height=2,
-            font=('Axial', 26, "bold"),
+            font=('Times', 26, "bold"),
             text="page 3"
         )
 
         title.grid(column=0, row=0)
 
-        text = ('hihihi')
+        text = ('Return Page')
 
         content = tk.Label(
             self.page_container,
@@ -182,7 +182,7 @@ class MyApp(tk.Frame):
             wraplength=600
         )
 
-        content.grid(column=0, row=0, sticky=tk.NSEW)
+        content.grid(column = 1, row = 0, sticky=tk.NSEW, padx = 30, pady = 30)
 
         self.return_button()
 
@@ -205,7 +205,7 @@ class MyApp(tk.Frame):
             command=lambda: self.change_page(0)
         )
         # Added padding (both vertical and horizontal)
-        return_button.grid(column=0, row=1, padx=10, pady=20)
+        return_button.grid(column=2, row=2, padx=5, pady=100)
 
 root = tk.Tk()
 root.title('My App')
