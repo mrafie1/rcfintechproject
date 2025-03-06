@@ -195,10 +195,10 @@ class MyApp(tk.Frame):
             activeforeground=self.colour3,
             disabledforeground=self.colour4,
             highlightthickness=0,
-            height=3,
-            width=15,
+            height=2,
+            width=10,
             relief=tk.FLAT,
-            font=('Times', 18, "bold"),  # Can change
+            font=('Times', 13, "bold"),  # Can change
             cursor='hand1',
             text="Back",
             # state=tk.DISABLED
