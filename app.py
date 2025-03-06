@@ -1,15 +1,22 @@
 """App page"""
 
 import tkinter as tk
+from tkinter.filedialog import askopenfilename
+from PIL import Image
+from image import analyze_image
+
 
 class MyApp(tk.Frame):
 
     def __init__(self, root):
 
-        self.colour1 = "#F3DDD5"
-        self.colour2 = "#DCE1D4"
-        self.colour3 = "WHITE"
-        self.colour4 = "#A4B8AC"
+        self.current_page_index = 0
+        self.pages = [self.page1, self.page2, self.page3]
+
+        self.colour1 = "#f6f1e5"
+        self.colour2 = "#203655"
+        self.colour3 = "#d9c1a1"
+        self.colour4 = "WHITE"
 
         super().__init__(
             root,
@@ -23,9 +30,21 @@ class MyApp(tk.Frame):
 
         self.load_main_widgets()
 
+
+    def upload_action(self):
+        img_path = askopenfilename()
+        im = Image.open(img_path)
+        print(analyze_image(im))
+
+
     def load_main_widgets(self):
         self.create_page_container()
-        self.create_pager()
+        # self.create_pager()
+        self.pages[self.current_page_index]()
+
+    def clear_frame(self, frame):
+        for child in frame.winfo_children():
+            child.destroy()
 
     def create_page_container(self):
         self.page_container = tk.Frame(
@@ -33,31 +52,52 @@ class MyApp(tk.Frame):
             background=self.colour1
         )
 
-        self.page_container.columnconfigure(0, weight=0)
+        self.page_container.columnconfigure(0, weight=1)
+        self.page_container.columnconfigure(1, weight=1)
         self.page_container.rowconfigure(0, weight=0)
         self.page_container.rowconfigure(1, weight=1)
+        self.page_container.grid(column=0, row=0, sticky=tk.NS)
 
-        self.page_container.grid(column=0, row=0, sticky=tk.NSEW)
 
-    def create_pager(self):
-        self.pager = tk.Frame(
-            self.main_frame,
-            background=self.colour1,
-            height=10,
-            width=300
+    def change_page(self, page_index):
+        self.clear_frame(self.page_container)
+        self.current_page_index = page_index
+        self.pages[self.current_page_index]()
+
+    def page1(self): #main page
+        self.clear_frame(self.page_container)
+
+        title = tk.Label(
+            self.page_container,
+            background = self.colour1,
+            foreground = self.colour2,
+            height = 2,
+            font = ('Times', 26, "bold"),
+            text = "page 1"
         )
 
-        # Configure the grid to make the frame fill the available space
-        self.pager.columnconfigure(0, weight=1)
-        self.pager.columnconfigure(1, weight=1)
-        self.pager.rowconfigure(0, weight=0)
-        self.pager.rowconfigure(1, weight=1)
-        self.pager.grid(column=0, row=0, sticky=tk.NS)
-        self.pager.grid_propagate(False)
+        title.grid(column = 0, row = 0)
+
+        text = ('Main Page')
+
+        content = tk.Label(
+            self.page_container,
+            background=self.colour3,
+            foreground=self.colour2,
+            justify=tk.LEFT,
+            anchor=tk.N,
+            pady=20,
+            font=('Times', 18, "bold"),
+            text=text,
+            wraplength=600
+        )
+
+        content.grid(column = 1, row = 0, sticky=tk.NSEW, padx = 20, pady = 30)
+
 
         # Add some space between the button and the top row
         inquiries_button = tk.Button(
-            self.pager,
+            self.page_container,
             background=self.colour2,
             foreground=self.colour3,
             activebackground=self.colour2,
@@ -67,24 +107,17 @@ class MyApp(tk.Frame):
             height=3,
             width=15,
             relief=tk.FLAT,
-            font=('Arial', 15),  # Can change
+            font=('Times', 18, "bold"),  # Can change
             cursor='hand1',
             text="Any inquiries",
-            state=tk.DISABLED
+            # state=tk.DISABLED
+            command=lambda: self.change_page(1)
         )
         # Added padding (both vertical and horizontal)
         inquiries_button.grid(column=0, row=1, padx=10, pady=20)
 
-        self.page_number = tk.Label(
-            self.pager,
-            background=self.colour1,
-            foreground=self.colour3,
-            font=("Arial", 10)  # Can change
-        )
-        self.page_number.grid(column=0, row=0, pady=5)
-
         wanttoreturn_button = tk.Button(
-            self.pager,
+            self.page_container,
             background=self.colour2,
             foreground=self.colour3,
             activebackground=self.colour2,
@@ -94,14 +127,116 @@ class MyApp(tk.Frame):
             height=3,
             width=15,
             relief=tk.FLAT,
-            font=('Arial', 15),  # Can change
+            font=('Times', 18, "bold"),  # Can change
             cursor='hand1',
-            text="Want to Return",
-            state=tk.DISABLED
+            text="Refund / Return",
+            # state=tk.DISABLED,
+            command=lambda: self.change_page(2)
         )
 
         # Added padding (both vertical and horizontal)
         wanttoreturn_button.grid(column=1, row=1, padx=10, pady=20)
+
+    def page2(self): #Inquiry chatbox page
+        title = tk.Label(
+            self.page_container,
+            background=self.colour1,
+            foreground=self.colour2,
+            height=2,
+            font=('Times', 26, "bold"),
+            text="page 2"
+        )
+
+        title.grid(column=0, row=0)
+
+        text = ('Inquiry ChatBox')
+
+        content = tk.Label(
+            self.page_container,
+            background=self.colour3,
+            foreground=self.colour2,
+            justify=tk.LEFT,
+            anchor=tk.N,
+            pady=20,
+            font=('Times', 18, "bold"),
+            text=text,
+            wraplength=600
+        )
+
+        content.grid(column = 1, row = 0, sticky=tk.NSEW, padx = 30, pady = 30)
+
+        self.return_button()
+
+    def page3(self): #return analysis page
+        title = tk.Label(
+            self.page_container,
+            background=self.colour1,
+            foreground=self.colour2,
+            height=2,
+            font=('Times', 26, "bold"),
+            text="page 3"
+        )
+
+        title.grid(column=0, row=0)
+
+        text = ('Return Page')
+
+        content = tk.Label(
+            self.page_container,
+            background=self.colour3,
+            foreground=self.colour2,
+            justify=tk.LEFT,
+            anchor=tk.N,
+            pady=20,
+            font=('Times', 18, "bold"),
+            text=text,
+            wraplength=600
+        )
+
+        content.grid(column = 1, row = 0, sticky=tk.NSEW, padx = 30, pady = 30)
+
+        upload_image = tk.Button(
+            self.page_container,
+            background=self.colour2,
+            foreground=self.colour3,
+            activebackground=self.colour2,
+            activeforeground=self.colour3,
+            disabledforeground=self.colour4,
+            highlightthickness=0,
+            height=3,
+            width=15,
+            relief=tk.FLAT,
+            font=('Times', 18, "bold"),  # Can change
+            cursor='hand1',
+            text="Upload Image",
+            # state=tk.DISABLED,
+            command=lambda: self.upload_action()
+        )
+
+        upload_image.grid(column=0, row=1, padx=10, pady=20)
+
+        self.return_button()
+
+    def return_button(self):
+        return_button = tk.Button(
+            self.page_container,
+            background=self.colour2,
+            foreground=self.colour3,
+            activebackground=self.colour2,
+            activeforeground=self.colour3,
+            disabledforeground=self.colour4,
+            highlightthickness=0,
+            height=2,
+            width=10,
+            relief=tk.FLAT,
+            font=('Times', 13, "bold"),  # Can change
+            cursor='hand1',
+            text="Back",
+            # state=tk.DISABLED
+            command=lambda: self.change_page(0)
+        )
+        # Added padding (both vertical and horizontal)
+        return_button.grid(column=2, row=2, padx=5, pady=100)
 
 root = tk.Tk()
 root.title('My App')
