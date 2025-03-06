@@ -9,10 +9,10 @@ class MyApp(tk.Frame):
         self.current_page_index = 0
         self.pages = [self.page1, self.page2, self.page3]
 
-        self.colour1 = "#F3DDD5"
-        self.colour2 = "#DCE1D4"
-        self.colour3 = "WHITE"
-        self.colour4 = "#A4B8AC"
+        self.colour1 = "#f6f1e5"
+        self.colour2 = "#203655"
+        self.colour3 = "#d9c1a1"
+        self.colour4 = "WHITE"
 
         super().__init__(
             root,
@@ -59,9 +59,9 @@ class MyApp(tk.Frame):
         title = tk.Label(
             self.page_container,
             background = self.colour1,
-            foreground = self.colour3,
+            foreground = self.colour2,
             height = 2,
-            font = ('Axial', 26, "bold"),
+            font = ('Times', 26, "bold"),
             text = "page 1"
         )
 
@@ -71,12 +71,12 @@ class MyApp(tk.Frame):
 
         content = tk.Label(
             self.page_container,
-            background=self.colour2,
-            foreground=self.colour3,
+            background=self.colour3,
+            foreground=self.colour2,
             justify=tk.LEFT,
             anchor=tk.N,
             pady=20,
-            font=("Arial", 16),
+            font=('Times', 18, "bold"),
             text=text,
             wraplength=600
         )
@@ -96,7 +96,7 @@ class MyApp(tk.Frame):
             height=3,
             width=15,
             relief=tk.FLAT,
-            font=('Arial', 15),  # Can change
+            font=('Times', 18, "bold"),  # Can change
             cursor='hand1',
             text="Any inquiries",
             # state=tk.DISABLED
@@ -116,7 +116,7 @@ class MyApp(tk.Frame):
             height=3,
             width=15,
             relief=tk.FLAT,
-            font=('Arial', 15),  # Can change
+            font=('Times', 18, "bold"),  # Can change
             cursor='hand1',
             text="Want to Return",
             # state=tk.DISABLED,
@@ -130,7 +130,7 @@ class MyApp(tk.Frame):
         title = tk.Label(
             self.page_container,
             background=self.colour1,
-            foreground=self.colour3,
+            foreground=self.colour2,
             height=2,
             font=('Axial', 26, "bold"),
             text="page 2"
@@ -138,27 +138,29 @@ class MyApp(tk.Frame):
 
         title.grid(column=0, row=0)
 
-        text = ('hihi')
+        text = ('Inquiry ChatBox')
 
         content = tk.Label(
             self.page_container,
-            background=self.colour2,
-            foreground=self.colour3,
+            background=self.colour3,
+            foreground=self.colour2,
             justify=tk.LEFT,
             anchor=tk.N,
             pady=20,
-            font=("Arial", 16),
+            font=('Times', 18, "bold"),
             text=text,
             wraplength=600
         )
 
         content.grid(column=0, row=0, sticky=tk.NSEW)
 
+        self.return_button()
+
     def page3(self):
         title = tk.Label(
             self.page_container,
             background=self.colour1,
-            foreground=self.colour3,
+            foreground=self.colour2,
             height=2,
             font=('Axial', 26, "bold"),
             text="page 3"
@@ -170,17 +172,40 @@ class MyApp(tk.Frame):
 
         content = tk.Label(
             self.page_container,
-            background=self.colour2,
-            foreground=self.colour3,
+            background=self.colour3,
+            foreground=self.colour2,
             justify=tk.LEFT,
             anchor=tk.N,
             pady=20,
-            font=("Arial", 16),
+            font=('Times', 18, "bold"),
             text=text,
             wraplength=600
         )
 
         content.grid(column=0, row=0, sticky=tk.NSEW)
+
+        self.return_button()
+
+    def return_button(self):
+        return_button = tk.Button(
+            self.page_container,
+            background=self.colour2,
+            foreground=self.colour3,
+            activebackground=self.colour2,
+            activeforeground=self.colour3,
+            disabledforeground=self.colour4,
+            highlightthickness=0,
+            height=3,
+            width=15,
+            relief=tk.FLAT,
+            font=('Times', 18, "bold"),  # Can change
+            cursor='hand1',
+            text="Back",
+            # state=tk.DISABLED
+            command=lambda: self.change_page(0)
+        )
+        # Added padding (both vertical and horizontal)
+        return_button.grid(column=0, row=1, padx=10, pady=20)
 
 root = tk.Tk()
 root.title('My App')
