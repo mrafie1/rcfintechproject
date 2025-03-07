@@ -12,8 +12,10 @@ print(response.text)
 
 chat = client.chats.create(model="gemini-2.0-flash")
 
+
 def get_user_input():
     return input("You: ")
+
 
 def get_response():
     user_input = get_user_input()
