@@ -13,8 +13,8 @@ COLOUR3 = "#d9c1a1"
 COLOUR4 = "WHITE"
 COLOUR5 = "#825855"
 
-FONT = "Helvetica 14"
-FONT_BOLD = "Helvetica 13 bold"
+FONT = "Times 14"
+FONT_BOLD = "Times 13 bold"
 
 
 class ChatApplication:
@@ -34,8 +34,8 @@ class ChatApplication:
         self.window.configure(width=470, height=550, bg = COLOUR3)
 
         #head label
-        head_label = Label(self.window, bg = COLOUR2, fg= COLOUR1,
-                           text = "Welcome", font = FONT_BOLD, pady = 10)
+        head_label = Label(self.window, bg = "#e8e2e1", fg= "#cd8b94",
+                           text = "SnapBack", font = "STIX 20 bold", pady = 10)
         # head_label.place(relwidth=1)
         head_label.pack(fill=X)
 
@@ -70,7 +70,7 @@ class ChatApplication:
         self.msg_entry.bind("<Return>", self._on_enter_pressed)
 
         # Send button
-        send_button = Button(bottom_label, text="Send", font=FONT_BOLD, width=20, bg=COLOUR4,
+        send_button = Button(bottom_label, text="Send", font=FONT_BOLD, width=10, bg="#e8e2e1",
                              command=self._on_send_pressed)
         # send_button.place(relx=0.77, rely=0.008, relheight=0.06, relwidth=0.22)
         send_button.pack(side=RIGHT, padx=(5,10), pady =10)
@@ -97,7 +97,3 @@ class ChatApplication:
         response = chat.send_message(user_msg)
         ai_msg = response.text.strip()
         self._insert_message(ai_msg, "AI")
-
-
-# app = ChatApplication()
-# app.run()

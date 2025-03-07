@@ -71,10 +71,10 @@ class MyApp(tk.Frame):
         title = tk.Label(
             self.page_container,
             background = self.colour1,
-            foreground = self.colour2,
+            foreground = "#cd8b94",
             height = 2,
-            font = ('Times', 26, "bold"),
-            text = "page 1"
+            font = ('ms serif', 35, "bold"),
+            text = "SnapBack"
         )
 
         title.grid(column = 0, row = 0)
