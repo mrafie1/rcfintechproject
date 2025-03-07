@@ -5,6 +5,7 @@ from tkinter.filedialog import askopenfilename
 from PIL import Image
 from image import analyze_image
 import chatbox
+import webbrowser_open
 
 
 class MyApp(tk.Frame):
@@ -21,7 +22,7 @@ class MyApp(tk.Frame):
 
         super().__init__(
             root,
-            bg = self.colour1
+            bg=self.colour1
         )
 
         self.main_frame = self
@@ -70,19 +71,19 @@ class MyApp(tk.Frame):
         self.current_page_index = page_index
         self.pages[self.current_page_index]()
 
-    def page1(self): #main page
+    def page1(self): # main page
         self.clear_frame(self.page_container)
 
         title = tk.Label(
             self.page_container,
-            background = self.colour1,
-            foreground = "#cd8b94",
-            height = 2,
-            font = ('ms serif', 35, "bold"),
-            text = "SnapBack"
+            background=self.colour1,
+            foreground="#cd8b94",
+            height=2,
+            font=('ms serif', 35, "bold"),
+            text="SnapBack"
         )
 
-        title.grid(column = 0, row = 0)
+        title.grid(column=0, row=0)
 
         text = ('Main Page')
 
@@ -98,7 +99,7 @@ class MyApp(tk.Frame):
             wraplength=600
         )
 
-        content.grid(column = 1, row = 0, sticky=tk.NSEW, padx = 20, pady = 30)
+        content.grid(column=1, row=0, sticky=tk.NSEW, padx=20, pady=30)
 
 
         # Add some space between the button and the top row
@@ -215,7 +216,7 @@ class MyApp(tk.Frame):
             wraplength=600
         )
 
-        content.grid(column = 1, row = 0, sticky=tk.NSEW, padx = 30, pady = 30)
+        content.grid(column=1, row=0, sticky=tk.NSEW, padx=30, pady=30)
 
         upload_image = tk.Button(
             self.page_container,
@@ -407,7 +408,81 @@ class MyApp(tk.Frame):
 
         content.grid(column=1, row=0, sticky=tk.NSEW, padx=30, pady=30)
 
-        self.return_button()
+        text = ('Our suggested value: $50')
+
+        content = tk.Label(
+            self.page_container,
+            background=self.colour1,
+            foreground=self.colour2,
+            justify=tk.LEFT,
+            anchor=tk.N,
+            pady=20,
+            font=('Times', 18, "bold"),
+            text=text,
+            wraplength=600
+        )
+
+        content.grid(column=1, row=0, sticky=tk.NSEW, padx=20, pady=30)
+
+        facebook = tk.Button(
+            self.page_container,
+            background=self.colour2,
+            foreground=self.colour3,
+            activebackground=self.colour2,
+            activeforeground=self.colour3,
+            disabledforeground=self.colour4,
+            highlightthickness=0,
+            height=3,
+            width=18,
+            relief=tk.FLAT,
+            font=('Times', 18, "bold"),  # Can change
+            cursor='hand1',
+            text="Facebook Marketplace",
+            # state=tk.DISABLED,
+            command=lambda: webbrowser_open.open("https://www.facebook.com/marketplace/")
+        )
+
+        facebook.grid(column=1, row=1, padx=10, pady=20)
+
+        ebay = tk.Button(
+            self.page_container,
+            background=self.colour2,
+            foreground=self.colour3,
+            activebackground=self.colour2,
+            activeforeground=self.colour3,
+            disabledforeground=self.colour4,
+            highlightthickness=0,
+            height=3,
+            width=15,
+            relief=tk.FLAT,
+            font=('Times', 18, "bold"),  # Can change
+            cursor='hand1',
+            text="eBay",
+            # state=tk.DISABLED,
+            command=lambda: webbrowser_open.open("https://www.ebay.ca/")
+        )
+
+        ebay.grid(column=1, row=2, padx=10, pady=20)
+
+        poshmark = tk.Button(
+            self.page_container,
+            background=self.colour2,
+            foreground=self.colour3,
+            activebackground=self.colour2,
+            activeforeground=self.colour3,
+            disabledforeground=self.colour4,
+            highlightthickness=0,
+            height=3,
+            width=15,
+            relief=tk.FLAT,
+            font=('Times', 18, "bold"),  # Can change
+            cursor='hand1',
+            text="Poshmark",
+            # state=tk.DISABLED,
+            command=lambda: webbrowser_open.open("https://poshmark.com/")
+        )
+
+        poshmark.grid(column=1, row=3, padx=10, pady=20)
 
     def page7(self): # donate page
         title = tk.Label(
