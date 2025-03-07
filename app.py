@@ -32,7 +32,6 @@ class MyApp(tk.Frame):
 
         self.load_main_widgets()
 
-
     def upload_action(self):
         img_path = askopenfilename()
         im = Image.open(img_path)
@@ -42,7 +41,6 @@ class MyApp(tk.Frame):
             self.change_page(3)
         else:
             self.change_page(4)
-
 
     def load_main_widgets(self):
         self.create_page_container()
@@ -65,13 +63,12 @@ class MyApp(tk.Frame):
         self.page_container.rowconfigure(1, weight=1)
         self.page_container.grid(column=0, row=0, sticky=tk.NS)
 
-
     def change_page(self, page_index):
         self.clear_frame(self.page_container)
         self.current_page_index = page_index
         self.pages[self.current_page_index]()
 
-    def page1(self): # main page
+    def page1(self):  # main page
         self.clear_frame(self.page_container)
 
         title = tk.Label(
@@ -85,7 +82,7 @@ class MyApp(tk.Frame):
 
         title.grid(column=0, row=0)
 
-        text = ('Main Page')
+        text = 'Main Page'
 
         content = tk.Label(
             self.page_container,
@@ -100,7 +97,6 @@ class MyApp(tk.Frame):
         )
 
         content.grid(column=1, row=0, sticky=tk.NSEW, padx=20, pady=30)
-
 
         # Add some space between the button and the top row
         inquiries_button = tk.Button(
@@ -144,7 +140,7 @@ class MyApp(tk.Frame):
         # Added padding (both vertical and horizontal)
         wanttoreturn_button.grid(column=1, row=1, padx=10, pady=20)
 
-    def page2(self): # Inquiry chatbox page
+    def page2(self):  # Inquiry chatbox page
         # title = tk.Label(
         #     self.page_container,
         #     background=self.colour1,
@@ -190,7 +186,7 @@ class MyApp(tk.Frame):
 
         self.return_button()
 
-    def page3(self): # return analysis page
+    def page3(self):  # return analysis page
         title = tk.Label(
             self.page_container,
             background=self.colour1,
@@ -202,7 +198,7 @@ class MyApp(tk.Frame):
 
         title.grid(column=0, row=0)
 
-        text = ('Return Page')
+        text = 'Return Page'
 
         content = tk.Label(
             self.page_container,
@@ -240,7 +236,7 @@ class MyApp(tk.Frame):
 
         self.return_button()
 
-    def page4(self): # returnable page
+    def page4(self):  # returnable page
         title = tk.Label(
             self.page_container,
             background=self.colour1,
@@ -252,7 +248,7 @@ class MyApp(tk.Frame):
 
         title.grid(column=0, row=0)
 
-        text = ('Looks good! You can return this.')
+        text = 'Looks good! You can return this.'
 
         content = tk.Label(
             self.page_container,
@@ -290,7 +286,7 @@ class MyApp(tk.Frame):
 
         self.return_button()
 
-    def page5(self): # unreturnable page
+    def page5(self):  # unreturnable page
         title = tk.Label(
             self.page_container,
             background=self.colour1,
@@ -302,7 +298,7 @@ class MyApp(tk.Frame):
 
         title.grid(column=0, row=0)
 
-        text = ('Oops, we noticed some issues in the photo...')
+        text = 'Oops, we noticed some issues in the photo...'
 
         content = tk.Label(
             self.page_container,
@@ -380,7 +376,7 @@ class MyApp(tk.Frame):
 
         # self.return_button()
 
-    def page6(self): # resale page
+    def page6(self):  # resale page
         title = tk.Label(
             self.page_container,
             background=self.colour1,
@@ -392,7 +388,7 @@ class MyApp(tk.Frame):
 
         title.grid(column=0, row=0)
 
-        text = ('Resale Page')
+        text = 'Resale Page'
 
         content = tk.Label(
             self.page_container,
@@ -408,7 +404,7 @@ class MyApp(tk.Frame):
 
         content.grid(column=1, row=0, sticky=tk.NSEW, padx=30, pady=30)
 
-        text = ('Our suggested value: $50')
+        text = 'Our suggested value: $50'
 
         content = tk.Label(
             self.page_container,
@@ -484,7 +480,7 @@ class MyApp(tk.Frame):
 
         poshmark.grid(column=1, row=3, padx=10, pady=20)
 
-    def page7(self): # donate page
+    def page7(self):  # donate page
         title = tk.Label(
             self.page_container,
             background=self.colour1,
@@ -496,7 +492,7 @@ class MyApp(tk.Frame):
 
         title.grid(column=0, row=0)
 
-        text = ('Donate Page')
+        text = 'Donate Page'
 
         content = tk.Label(
             self.page_container,
@@ -534,6 +530,7 @@ class MyApp(tk.Frame):
         )
         # Added padding (both vertical and horizontal)
         return_button.grid(column=1, row=2, padx=10, pady=50, sticky=tk.E)
+
 
 root = tk.Tk()
 root.title('My App')
