@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from PIL import Image
 from image import analyze_image
+import chatbox
 
 
 class MyApp(tk.Frame):
@@ -138,32 +139,48 @@ class MyApp(tk.Frame):
         wanttoreturn_button.grid(column=1, row=1, padx=10, pady=20)
 
     def page2(self): #Inquiry chatbox page
-        title = tk.Label(
-            self.page_container,
-            background=self.colour1,
-            foreground=self.colour2,
-            height=2,
-            font=('Times', 26, "bold"),
-            text="page 2"
-        )
+        # title = tk.Label(
+        #     self.page_container,
+        #     background=self.colour1,
+        #     foreground=self.colour2,
+        #     height=2,
+        #     font=('Times', 26, "bold"),
+        #     text="page 2"
+        # )
+        #
+        # title.grid(column=0, row=0)
+        #
+        # text = ('Inquiry ChatBox')
+        #
+        # content = tk.Label(
+        #     self.page_container,
+        #     background=self.colour3,
+        #     foreground=self.colour2,
+        #     justify=tk.LEFT,
+        #     anchor=tk.N,
+        #     pady=20,
+        #     font=('Times', 18, "bold"),
+        #     text=text,
+        #     wraplength=600
+        # )
+        #
+        # content.grid(column = 1, row = 0, sticky=tk.NSEW, padx = 30, pady = 30)
+        #
+        # self.return_button()
 
-        title.grid(column=0, row=0)
+        self.clear_frame(self.page_container)
 
-        text = ('Inquiry ChatBox')
+        # Create a frame to hold the chatbox
+        self.chat_frame = tk.Frame(self.page_container, bg=self.colour3)
+        self.chat_frame.grid(column=0, row=1, columnspan=2, sticky=tk.NSEW, padx=20, pady=20)
 
-        content = tk.Label(
-            self.page_container,
-            background=self.colour3,
-            foreground=self.colour2,
-            justify=tk.LEFT,
-            anchor=tk.N,
-            pady=20,
-            font=('Times', 18, "bold"),
-            text=text,
-            wraplength=600
-        )
+        # Expand chatbox properly
+        self.chat_frame.columnconfigure(0, weight=1)
+        self.chat_frame.rowconfigure(0, weight=1)
 
-        content.grid(column = 1, row = 0, sticky=tk.NSEW, padx = 30, pady = 30)
+        # Initialize and pack chatbox
+        self.chat_app = chatbox.ChatApplication(self.chat_frame)
+        self.chat_app.run()
 
         self.return_button()
 
@@ -236,7 +253,7 @@ class MyApp(tk.Frame):
             command=lambda: self.change_page(0)
         )
         # Added padding (both vertical and horizontal)
-        return_button.grid(column=2, row=2, padx=5, pady=100)
+        return_button.grid(column=1, row=2, padx=10, pady=50, sticky=tk.E)
 
 root = tk.Tk()
 root.title('My App')
