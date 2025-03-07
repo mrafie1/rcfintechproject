@@ -24,6 +24,11 @@ class ChatApplication:
         self.window = parent  # Set the parent frame instead of Tk()
         self._setup_main_window()
 
+        self._insert_message(
+            "Hello! I’m SnapBack's AI assistant. How can I assist you today?",
+            "AI Assistant"
+        )
+
     def run(self):
         # self.window.mainloop()
         pass
@@ -94,6 +99,28 @@ class ChatApplication:
         self.text_widget.see(END)  # Auto-scroll
 
     def _get_ai_response(self, user_msg):
-        response = chat.send_message(user_msg)
+        """Generates a clothing store assistant response using AI."""
+        prompt = f"""
+            You are a helpful and knowledgeable assistant for SnapBack, an app designed to help customers check if their clothing is eligible for return or refund. SnapBack aims to:
+            1. Promote environmental friendliness by reducing waste and encouraging sustainable practices.
+            2. Save time for customers by providing quick and efficient solutions for return/refund inquiries.
+
+            Your primary role is to assist customers with the following:
+            - Checking if their clothing meets the return/refund criteria (e.g., condition, tags, time frame).
+            - Providing information about the return/refund process.
+            - Offering advice on how to properly prepare items for return.
+            - Answering questions about SnapBack's environmental goals and time-saving features.
+
+            In addition, you can also assist with:
+            - Providing information about product availability, recommendations, materials, and sizing.
+            - Answering questions about return policies, delivery options, and ongoing offers.
+            - Offering fashion advice and helping customers find the right products based on their preferences.
+
+            If the customer's question is unrelated to clothing, returns, refunds, or SnapBack's functionality, politely let them know that you are here to assist with SnapBack-related inquiries.
+
+            Customer: {user_msg}
+            AI Assistant:
+            """
+        response = chat.send_message(prompt)
         ai_msg = response.text.strip()
-        self._insert_message(ai_msg, "AI")
+        self._insert_message(ai_msg, "AI Assistant")
