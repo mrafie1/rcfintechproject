@@ -12,7 +12,7 @@ class MyApp(tk.Frame):
     def __init__(self, root):
 
         self.current_page_index = 0
-        self.pages = [self.page1, self.page2, self.page3]
+        self.pages = [self.page1, self.page2, self.page3, self.page4, self.page5, self.page6, self.page7]
 
         self.colour1 = "#f6f1e5"
         self.colour2 = "#203655"
@@ -35,7 +35,12 @@ class MyApp(tk.Frame):
     def upload_action(self):
         img_path = askopenfilename()
         im = Image.open(img_path)
-        print(analyze_image(im))
+        # print(analyze_image(im))
+        answer = analyze_image(im)
+        if answer == "Returnable":
+            self.change_page(3)
+        else:
+            self.change_page(4)
 
 
     def load_main_widgets(self):
@@ -138,7 +143,7 @@ class MyApp(tk.Frame):
         # Added padding (both vertical and horizontal)
         wanttoreturn_button.grid(column=1, row=1, padx=10, pady=20)
 
-    def page2(self): #Inquiry chatbox page
+    def page2(self): # Inquiry chatbox page
         # title = tk.Label(
         #     self.page_container,
         #     background=self.colour1,
@@ -184,7 +189,7 @@ class MyApp(tk.Frame):
 
         self.return_button()
 
-    def page3(self): #return analysis page
+    def page3(self): # return analysis page
         title = tk.Label(
             self.page_container,
             background=self.colour1,
@@ -231,6 +236,206 @@ class MyApp(tk.Frame):
         )
 
         upload_image.grid(column=0, row=1, padx=10, pady=20)
+
+        self.return_button()
+
+    def page4(self): # returnable page
+        title = tk.Label(
+            self.page_container,
+            background=self.colour1,
+            foreground=self.colour2,
+            height=2,
+            font=('Times', 26, "bold"),
+            text="page 4"
+        )
+
+        title.grid(column=0, row=0)
+
+        text = ('Looks good! You can return this.')
+
+        content = tk.Label(
+            self.page_container,
+            background=self.colour1,
+            foreground=self.colour2,
+            justify=tk.LEFT,
+            anchor=tk.N,
+            pady=20,
+            font=('Times', 18, "bold"),
+            text=text,
+            wraplength=600
+        )
+
+        content.grid(column=1, row=1, sticky=tk.NSEW, padx=20, pady=30)
+
+        continue_return = tk.Button(
+            self.page_container,
+            background=self.colour2,
+            foreground=self.colour3,
+            activebackground=self.colour2,
+            activeforeground=self.colour3,
+            disabledforeground=self.colour4,
+            highlightthickness=0,
+            height=3,
+            width=15,
+            relief=tk.FLAT,
+            font=('Times', 18, "bold"),  # Can change
+            cursor='hand1',
+            text="Continue Returning",
+            # state=tk.DISABLED,
+            command=lambda: self.upload_action()
+        )
+
+        continue_return.grid(column=1, row=1, padx=10, pady=20)
+
+        self.return_button()
+
+    def page5(self): # unreturnable page
+        title = tk.Label(
+            self.page_container,
+            background=self.colour1,
+            foreground=self.colour2,
+            height=2,
+            font=('Times', 26, "bold"),
+            text="page 5"
+        )
+
+        title.grid(column=0, row=0)
+
+        text = ('Oops, we noticed some issues in the photo...')
+
+        content = tk.Label(
+            self.page_container,
+            background=self.colour1,
+            foreground=self.colour2,
+            justify=tk.LEFT,
+            anchor=tk.N,
+            pady=20,
+            font=('Times', 18, "bold"),
+            text=text,
+            wraplength=600
+        )
+
+        content.grid(column=1, row=1, sticky=tk.NSEW, padx=20, pady=30)
+
+        resale = tk.Button(
+            self.page_container,
+            background=self.colour2,
+            foreground=self.colour3,
+            activebackground=self.colour2,
+            activeforeground=self.colour3,
+            disabledforeground=self.colour4,
+            highlightthickness=0,
+            height=3,
+            width=15,
+            relief=tk.FLAT,
+            font=('Times', 18, "bold"),  # Can change
+            cursor='hand1',
+            text="Resale",
+            # state=tk.DISABLED,
+            command=lambda: self.change_page(5)
+        )
+
+        resale.grid(column=1, row=1, padx=10, pady=20)
+
+        donate = tk.Button(
+            self.page_container,
+            background=self.colour2,
+            foreground=self.colour3,
+            activebackground=self.colour2,
+            activeforeground=self.colour3,
+            disabledforeground=self.colour4,
+            highlightthickness=0,
+            height=3,
+            width=15,
+            relief=tk.FLAT,
+            font=('Times', 18, "bold"),  # Can change
+            cursor='hand1',
+            text="Donate",
+            # state=tk.DISABLED,
+            command=lambda: self.change_page(6)
+        )
+
+        donate.grid(column=1, row=2, padx=10, pady=20)
+
+        try_again = tk.Button(
+            self.page_container,
+            background=self.colour2,
+            foreground=self.colour3,
+            activebackground=self.colour2,
+            activeforeground=self.colour3,
+            disabledforeground=self.colour4,
+            highlightthickness=0,
+            height=3,
+            width=15,
+            relief=tk.FLAT,
+            font=('Times', 18, "bold"),  # Can change
+            cursor='hand1',
+            text="Try Again",
+            # state=tk.DISABLED,
+            command=lambda: self.upload_action()
+        )
+
+        try_again.grid(column=1, row=3, padx=10, pady=20)
+
+        # self.return_button()
+
+    def page6(self): # resale page
+        title = tk.Label(
+            self.page_container,
+            background=self.colour1,
+            foreground=self.colour2,
+            height=2,
+            font=('Times', 26, "bold"),
+            text="page 6"
+        )
+
+        title.grid(column=0, row=0)
+
+        text = ('Resale Page')
+
+        content = tk.Label(
+            self.page_container,
+            background=self.colour3,
+            foreground=self.colour2,
+            justify=tk.LEFT,
+            anchor=tk.N,
+            pady=20,
+            font=('Times', 18, "bold"),
+            text=text,
+            wraplength=600
+        )
+
+        content.grid(column=1, row=0, sticky=tk.NSEW, padx=30, pady=30)
+
+        self.return_button()
+
+    def page7(self): # donate page
+        title = tk.Label(
+            self.page_container,
+            background=self.colour1,
+            foreground=self.colour2,
+            height=2,
+            font=('Times', 26, "bold"),
+            text="page 7"
+        )
+
+        title.grid(column=0, row=0)
+
+        text = ('Donate Page')
+
+        content = tk.Label(
+            self.page_container,
+            background=self.colour3,
+            foreground=self.colour2,
+            justify=tk.LEFT,
+            anchor=tk.N,
+            pady=20,
+            font=('Times', 18, "bold"),
+            text=text,
+            wraplength=600
+        )
+
+        content.grid(column=1, row=0, sticky=tk.NSEW, padx=30, pady=30)
 
         self.return_button()
 
