@@ -145,34 +145,6 @@ class MyApp(tk.Frame):
         wanttoreturn_button.grid(column=1, row=1, padx=10, pady=20)
 
     def page2(self): # Inquiry chatbox page
-        # title = tk.Label(
-        #     self.page_container,
-        #     background=self.colour1,
-        #     foreground=self.colour2,
-        #     height=2,
-        #     font=('Times', 26, "bold"),
-        #     text="page 2"
-        # )
-        #
-        # title.grid(column=0, row=0)
-        #
-        # text = ('Inquiry ChatBox')
-        #
-        # content = tk.Label(
-        #     self.page_container,
-        #     background=self.colour3,
-        #     foreground=self.colour2,
-        #     justify=tk.LEFT,
-        #     anchor=tk.N,
-        #     pady=20,
-        #     font=('Times', 18, "bold"),
-        #     text=text,
-        #     wraplength=600
-        # )
-        #
-        # content.grid(column = 1, row = 0, sticky=tk.NSEW, padx = 30, pady = 30)
-        #
-        # self.return_button()
 
         self.clear_frame(self.page_container)
 
@@ -194,15 +166,15 @@ class MyApp(tk.Frame):
         title = tk.Label(
             self.page_container,
             background=self.colour1,
-            foreground=self.colour2,
+            foreground="#cd8b94",
             height=2,
-            font=('Times', 26, "bold"),
-            text="page 3"
+            font=('ms serif', 35, "bold"),
+            text="SnapBack"
         )
 
         title.grid(column=0, row=0)
 
-        text = ('Return Page')
+        text = ('Snap. Return. Done!')
 
         content = tk.Label(
             self.page_container,
@@ -211,7 +183,7 @@ class MyApp(tk.Frame):
             justify=tk.LEFT,
             anchor=tk.N,
             pady=20,
-            font=('Times', 18, "bold"),
+            font=('Times', 16, "bold"),
             text=text,
             wraplength=600
         )
@@ -236,21 +208,24 @@ class MyApp(tk.Frame):
             command=lambda: self.upload_action()
         )
 
-        upload_image.grid(column=0, row=1, padx=10, pady=20)
+        upload_image.grid(column=1, row=1, padx=10, pady=20)
 
         self.return_button()
 
     def page4(self): # returnable page
+        for widget in self.page_container.winfo_children():
+            widget.destroy()
+
         title = tk.Label(
             self.page_container,
             background=self.colour1,
-            foreground=self.colour2,
+            foreground="#cd8b94",
             height=2,
-            font=('Times', 26, "bold"),
-            text="page 4"
+            font=('ms serif', 35, "bold"),
+            text="SnapBack"
         )
 
-        title.grid(column=0, row=0)
+        title.grid(column=0, row=0, columnspan = 2, sticky="ew", pady=(10,20))
 
         text = ('Looks good! You can return this.')
 
@@ -266,7 +241,7 @@ class MyApp(tk.Frame):
             wraplength=600
         )
 
-        content.grid(column=1, row=1, sticky=tk.NSEW, padx=20, pady=30)
+        content.grid(column=0, row=1, columnspan=2, sticky="nsew", padx=20, pady=(0,30))
 
         continue_return = tk.Button(
             self.page_container,
@@ -286,21 +261,48 @@ class MyApp(tk.Frame):
             command=lambda: self.upload_action()
         )
 
-        continue_return.grid(column=1, row=1, padx=10, pady=20)
+        continue_return.grid(column=0, row=2, columnspan=2, pady=(0,10))
 
-        self.return_button()
+        return_button = tk.Button(
+            self.page_container,
+            background=self.colour2,
+            foreground=self.colour3,
+            activebackground=self.colour2,
+            activeforeground=self.colour3,
+            disabledforeground=self.colour4,
+            highlightthickness=0,
+            height=2,
+            width=10,
+            relief=tk.FLAT,
+            font=('Times', 13, "bold"),  # Can change
+            cursor='hand1',
+            text="Back",
+            # state=tk.DISABLED
+            command=lambda: self.change_page(0)
+        )
+        # Added padding (both vertical and horizontal)
+        return_button.grid(column=0, row=3, columnspan=2, pady=(10,20), sticky="e")
+
+        self.page_container.grid_columnconfigure(0, weight=1)
+        self.page_container.grid_columnconfigure(1, weight=1)
+        self.page_container.grid_rowconfigure(1, weight=1)
+        # self.return_button()
 
     def page5(self): # unreturnable page
+        # Clear the page container before adding new widgets
+        for widget in self.page_container.winfo_children():
+            widget.destroy()
+
         title = tk.Label(
             self.page_container,
             background=self.colour1,
-            foreground=self.colour2,
+            foreground="#cd8b94",
             height=2,
-            font=('Times', 26, "bold"),
-            text="page 5"
+            font=('ms serif', 35, "bold"),
+            text="SnapBack"
         )
 
-        title.grid(column=0, row=0)
+        title.grid(column=0, row=0, columnspan=2, sticky="ew", pady=(10,20))
 
         text = ('Oops, we noticed some issues in the photo...')
 
@@ -316,7 +318,7 @@ class MyApp(tk.Frame):
             wraplength=600
         )
 
-        content.grid(column=1, row=1, sticky=tk.NSEW, padx=20, pady=30)
+        content.grid(column=0, row=1, columnspan=2, sticky="nsew", padx=20, pady=(0,30))
 
         resale = tk.Button(
             self.page_container,
@@ -336,7 +338,7 @@ class MyApp(tk.Frame):
             command=lambda: self.change_page(5)
         )
 
-        resale.grid(column=1, row=1, padx=10, pady=20)
+        resale.grid(column=0, row=2, padx=10, pady=10)
 
         donate = tk.Button(
             self.page_container,
@@ -356,7 +358,7 @@ class MyApp(tk.Frame):
             command=lambda: self.change_page(6)
         )
 
-        donate.grid(column=1, row=2, padx=10, pady=20)
+        donate.grid(column=1, row=2, padx=10, pady=10)
 
         try_again = tk.Button(
             self.page_container,
@@ -376,21 +378,28 @@ class MyApp(tk.Frame):
             command=lambda: self.upload_action()
         )
 
-        try_again.grid(column=1, row=3, padx=10, pady=20)
+        try_again.grid(column=0, row=3, columnspan=2, padx=10, pady=(10,20))
 
+        self.page_container.grid_columnconfigure(0, weight=1)
+        self.page_container.grid_columnconfigure(1, weight=1)
+        self.page_container.grid_rowconfigure(1, weight=1)
         # self.return_button()
 
     def page6(self): # resale page
+        # Clear the page container before adding new widgets
+        for widget in self.page_container.winfo_children():
+            widget.destroy()
+
         title = tk.Label(
             self.page_container,
             background=self.colour1,
-            foreground=self.colour2,
+            foreground="#cd8b94",
             height=2,
-            font=('Times', 26, "bold"),
-            text="page 6"
+            font=('ms serif', 35, "bold"),
+            text="SnapBack"
         )
 
-        title.grid(column=0, row=0)
+        title.grid(column=0, row=0, columnspan=2, sticky="ew", pady=(10,20))
 
         text = ('Resale Page')
 
@@ -406,7 +415,7 @@ class MyApp(tk.Frame):
             wraplength=600
         )
 
-        content.grid(column=1, row=0, sticky=tk.NSEW, padx=30, pady=30)
+        content.grid(column=0, row=1, columnspan=2, sticky="nsew", padx=20, pady=(0,10))
 
         text = ('Our suggested value: $50')
 
@@ -422,7 +431,7 @@ class MyApp(tk.Frame):
             wraplength=600
         )
 
-        content.grid(column=1, row=0, sticky=tk.NSEW, padx=20, pady=30)
+        content.grid(column=0, row=2, columnspan=2, sticky="nsew", padx=20, pady=(0,20))
 
         facebook = tk.Button(
             self.page_container,
@@ -442,7 +451,7 @@ class MyApp(tk.Frame):
             command=lambda: webbrowser_open.open("https://www.facebook.com/marketplace/")
         )
 
-        facebook.grid(column=1, row=1, padx=10, pady=20)
+        facebook.grid(column=0, row=3, columnspan=2, pady=(0,10))
 
         ebay = tk.Button(
             self.page_container,
@@ -462,7 +471,7 @@ class MyApp(tk.Frame):
             command=lambda: webbrowser_open.open("https://www.ebay.ca/")
         )
 
-        ebay.grid(column=1, row=2, padx=10, pady=20)
+        ebay.grid(column=0, row=4, columnspan=2, pady=(0,10))
 
         poshmark = tk.Button(
             self.page_container,
@@ -482,19 +491,31 @@ class MyApp(tk.Frame):
             command=lambda: webbrowser_open.open("https://poshmark.com/")
         )
 
-        poshmark.grid(column=1, row=3, padx=10, pady=20)
+        poshmark.grid(column=0, row=5, columnspan=2, pady=(0,20))
+
+        self.page_container.grid_columnconfigure(0, weight=1)
+        self.page_container.grid_columnconfigure(1, weight=1)
+        self.page_container.grid_rowconfigure(1, weight=1)
+        self.page_container.grid_rowconfigure(2, weight=1)
+        self.page_container.grid_rowconfigure(3, weight=1)
+        self.page_container.grid_rowconfigure(4, weight=1)
+        self.page_container.grid_rowconfigure(5, weight=1)
 
     def page7(self): # donate page
+        # Clear the page container before adding new widgets
+        for widget in self.page_container.winfo_children():
+            widget.destroy()
+
         title = tk.Label(
             self.page_container,
             background=self.colour1,
-            foreground=self.colour2,
+            foreground="#cd8b94",
             height=2,
-            font=('Times', 26, "bold"),
-            text="page 7"
+            font=('ms serif', 35, "bold"),
+            text="SnapBack"
         )
 
-        title.grid(column=0, row=0)
+        title.grid(column=0, row=0, columnspan=2, sticky="ew", pady=(10,20))
 
         text = ('Donate Page')
 
@@ -510,7 +531,11 @@ class MyApp(tk.Frame):
             wraplength=600
         )
 
-        content.grid(column=1, row=0, sticky=tk.NSEW, padx=30, pady=30)
+        content.grid(column=0, row=1, columnspan=2, sticky="nsew", padx=20, pady=(0,30))
+
+        self.page_container.grid_columnconfigure(0, weight=1)
+        self.page_container.grid_columnconfigure(1, weight=1)
+        self.page_container.grid_rowconfigure(1, weight=1)
 
         self.return_button()
 
