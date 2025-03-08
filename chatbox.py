@@ -19,8 +19,6 @@ FONT_BOLD = "Times 13 bold"
 
 class ChatApplication:
     def __init__(self, parent):
-        # self.window = Tk()
-        # self._setup_main_window()
         self.window = parent  # Set the parent frame instead of Tk()
         self._setup_main_window()
 
@@ -34,42 +32,34 @@ class ChatApplication:
         pass
 
     def _setup_main_window(self):
-        # self.window.title("Chat")
-        # self.window.resizable(width = False, height = False)
         self.window.configure(width=470, height=550, bg=COLOUR3)
 
         # head label
         head_label = Label(self.window, bg="#e8e2e1", fg="#cd8b94",
                            text="SnapBack", font="STIX 20 bold", pady=10)
-        # head_label.place(relwidth=1)
         head_label.pack(fill=X)
 
         # tiny divider
         line = Label(self.window, width=450, bg=COLOUR1)
-        # line.place(relwidth=1, rely=0.07, relheight=0.012)
         line.pack(fill=X, pady=(0, 5))
 
         # text widget
         self.text_widget = Text(self.window, width=20, height=2, bg=COLOUR3, fg=COLOUR1,
                                 font=FONT, padx=5, pady=5)
-        # self.text_widget.place(relheight=0.745, relwidth=1, rely=0.08)
         self.text_widget.pack(fill=BOTH, expand=True, pady=(0, 5))
         self.text_widget.configure(cursor="arrow", state=DISABLED)
 
         # scroll bar
         scrollbar = Scrollbar(self.text_widget)
-        # scrollbar.place(relheight=1, relx=0.974)
         scrollbar.pack(side=RIGHT, fill=Y)
         scrollbar.configure(command=self.text_widget.yview)
 
         # bottom label
         bottom_label = Label(self.window, bg=COLOUR1, height=80)
-        # bottom_label.place(relwidth=1, rely=0.825)
         bottom_label.pack(fill=X, pady=(5, 0))
 
         # message entry box
         self.msg_entry = Entry(bottom_label, bg=COLOUR4, fg=COLOUR2, font=FONT)
-        # self.msg_entry.place(relwidth=0.74, relheight=0.06, rely= 0.008, relx=0.011)
         self.msg_entry.pack(side=LEFT, fill=X, expand=True, padx=(10, 5), pady=10)
         self.msg_entry.focus()
         self.msg_entry.bind("<Return>", self._on_enter_pressed)
@@ -77,7 +67,6 @@ class ChatApplication:
         # Send button
         send_button = Button(bottom_label, text="Send", font=FONT_BOLD, width=10, bg="#e8e2e1",
                              command=self._on_send_pressed)
-        # send_button.place(relx=0.77, rely=0.008, relheight=0.06, relwidth=0.22)
         send_button.pack(side=RIGHT, padx=(5, 10), pady=10)
 
     def _on_enter_pressed(self, _event):
